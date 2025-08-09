@@ -2,6 +2,8 @@ vim.lsp.enable({
   "luals",
   "pyright",
   "rust-analyzer",
+  "svelte",
+  "typescript",
 })
 
 vim.diagnostic.config({
