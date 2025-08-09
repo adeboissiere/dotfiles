@@ -1,8 +1,10 @@
 vim.lsp.enable({
+  "emmet",
   "luals",
   "pyright",
   "rust-analyzer",
   "svelte",
+  "tailwind",
   "typescript",
 })
 
