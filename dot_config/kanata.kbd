@@ -12,18 +12,20 @@
   ;; Note: consider using different time values for your different fingers.
   ;; For example, your pinkies might be slower to release keys and index
   ;; fingers faster.
-  tap-time 200
-  hold-time 200
+  fast-tap-time 200
+  fast-hold-time 200
+  slow-tap-time 200
+  slow-hold-time 200
 )
 (defalias
-  a (tap-hold $tap-time $hold-time a lctl)
-  s (tap-hold $tap-time $hold-time s lalt)
-  d (tap-hold $tap-time $hold-time d lmet)
-  f (tap-hold $tap-time $hold-time f lsft)
-  j (tap-hold $tap-time $hold-time j rsft)
-  k (tap-hold $tap-time $hold-time k rmet)
-  l (tap-hold $tap-time $hold-time l ralt)
-  ; (tap-hold $tap-time $hold-time ; rctl)
+  a (tap-hold $slow-tap-time $slow-hold-time a lctl)
+  s (tap-hold $slow-tap-time $slow-hold-time s lalt)
+  d (tap-hold $slow-tap-time $slow-hold-time d lmet)
+  f (tap-hold $slow-tap-time $fast-hold-time f lsft)
+  j (tap-hold $slow-tap-time $fast-hold-time j rsft)
+  k (tap-hold $slow-tap-time $slow-hold-time k rmet)
+  l (tap-hold $slow-tap-time $slow-hold-time l ralt)
+  ; (tap-hold $slow-tap-time $slow-hold-time ; rctl)
 )
 (deflayer base
   @a  @s  @d  @f  @j  @k  @l  @;
