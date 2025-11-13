@@ -12,12 +12,12 @@ if pgrep -f "$DAEMON_PATH" > /dev/null; then
     echo "Karabiner daemon is already running."
 else
     echo "Starting Karabiner daemon..."
-    sudo nohup "$DAEMON_PATH" > ~/karabiner-daemon.log 2>&1 &
+    sudo nohup "$DAEMON_PATH" > /dev/null 2>&1 &
     sleep 1  # Give it a moment to start
 fi
 
-# --- Step 3: Start kanata with your config ---
+# --- Step 3: Start kanata with config ---
 echo "Starting kanata..."
-sudo kanata --cfg kanata.kbd
+sudo kanata --cfg ~/.config/kanata.kbd
 
 echo "All done!"
