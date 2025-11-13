@@ -1,32 +1,116 @@
-;; Basic home row mods example using QWERTY
-;; For a more complex but perhaps usable configuration,
-;; see home-row-mod-advanced.kbd
-
 (defcfg
   process-unmapped-keys yes
+  concurrent-tap-hold yes
 )
+
 (defsrc
-  a   s   d   f   j   k   l   ;
+  esc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
 )
+
 (defvar
-  ;; Note: consider using different time values for your different fingers.
-  ;; For example, your pinkies might be slower to release keys and index
-  ;; fingers faster.
-  fast-tap-time 200
-  fast-hold-time 200
-  slow-tap-time 200
-  slow-hold-time 200
+  chord-time 40
+  tap-time 200
+  hold-time 200
+  caps-timeout 2000
+
+  left-hand-keys (
+    q w e r t
+    a s d f g
+    z x c v b
+  )
+  right-hand-keys (
+    y u i o p
+    h j k l ;
+    n m , . /
+  )
 )
+
+(defchordsv2
+  (f j)   (caps-word-toggle $caps-timeout)                            $chord-time all-released   (num)
+
+  ;; (a s)   (tap-hold $chord-time $hold-time   tab (multi lctl lalt))   $chord-time all-released   (num)
+  (w e)   S-9                                                         $chord-time all-released   (base)
+  (s d)   (tap-hold $chord-time $hold-time   [ (multi lalt lmet))     $chord-time all-released   (base)
+  (x c)   S-[                                                         $chord-time all-released   (base)
+  (s f)   (multi lalt lsft)                                           $chord-time all-released   (num)
+  (d f)   (multi met lsft)                                            $chord-time all-released   (num)
+
+  (j k)   (tap-hold $chord-time $hold-time   esc (multi rsft rmet))   $chord-time all-released   (num)
+  (i o)   S-0                                                         $chord-time all-released   (base)
+  (k l)   (tap-hold $chord-time $hold-time   ] (multi rmet ralt))     $chord-time all-released   (base)
+  (, .)   S-]                                                         $chord-time all-released   (base)
+)
+
 (defalias
-  a (tap-hold $slow-tap-time $slow-hold-time a lctl)
-  s (tap-hold $slow-tap-time $slow-hold-time s lalt)
-  d (tap-hold $slow-tap-time $slow-hold-time d lmet)
-  f (tap-hold $slow-tap-time $fast-hold-time f lsft)
-  j (tap-hold $slow-tap-time $fast-hold-time j rsft)
-  k (tap-hold $slow-tap-time $slow-hold-time k rmet)
-  l (tap-hold $slow-tap-time $slow-hold-time l ralt)
-  ; (tap-hold $slow-tap-time $slow-hold-time ; rctl)
+  #|
+  a (tap-hold-release-keys $tap-time $hold-time a lctl $left-hand-keys)
+  s (tap-hold-release-keys $tap-time $hold-time s lalt $left-hand-keys)
+  d (tap-hold-release-keys $tap-time $hold-time d lmet $left-hand-keys)
+  f (tap-hold-release-keys $tap-time $hold-time f lsft $left-hand-keys)
+  j (tap-hold-release-keys $tap-time $hold-time j rsft $right-hand-keys)
+  k (tap-hold-release-keys $tap-time $hold-time k rmet $right-hand-keys)
+  l (tap-hold-release-keys $tap-time $hold-time l ralt $right-hand-keys)
+  ; (tap-hold-release-keys $tap-time $hold-time ; rctl $right-hand-keys)
+  |#
+  a (tap-hold $tap-time $hold-time a lctl)
+  s (tap-hold $tap-time $hold-time s lalt)
+  d (tap-hold $tap-time $hold-time d lmet)
+  f (tap-hold $tap-time $hold-time f lsft)
+  j (tap-hold $tap-time $hold-time j rsft)
+  k (tap-hold $tap-time $hold-time k rmet)
+  l (tap-hold $tap-time $hold-time l ralt)
+  ; (tap-hold $tap-time $hold-time ; rctl)
+  esc (tap-hold-release $tap-time $hold-time esc lrld)
+  num (layer-toggle num)
 )
+
 (deflayer base
-  @a  @s  @d  @f  @j  @k  @l  @;
+  @esc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl @num lalt           spc            ralt rmet rctl
+)
+
+(deflayermap (num)
+  q `
+  w S-2  ;; @
+  e S-4  ;; $
+  r S-5  ;; %
+  t S-7  ;; &
+  a S-1  ;; !
+  s S-3  ;; #
+  d S--  ;; _
+  f S-'  ;; "
+  g '    ;; '
+  x S-6  ;; ^
+  c S-\  ;; |
+  v \    ;; \
+  b S-`  ;; ~
+
+  y -
+  u 7
+  i 8
+  o 9
+  p /
+  h S-=
+  j 4
+  k 5
+  l 6
+  ; S-8
+  n 0
+  m 1
+  , 2
+  . 3
+  / =
+
+  spc spc
+  bspc bspc
+  ___ XX
 )
