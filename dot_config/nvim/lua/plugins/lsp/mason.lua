@@ -1,18 +1,31 @@
 return {
-	"williamboman/mason.nvim",
-	config = function()
-		-- import mason
-		local mason = require("mason")
-
-		-- enable mason and configure icons
-		mason.setup({
-			ui = {
-				icons = {
-					package_installed = "✓",
-					package_pending = "➜",
-					package_uninstalled = "✗",
-				},
-			},
-		})
-	end,
+  "mason-org/mason-lspconfig.nvim",
+  opts = {
+    ensure_installed = {
+      "cssls",
+      "html",
+      "emmet_language_server",
+      "lua_ls",
+      "pyright",
+      "rust_analyzer",
+      "svelte",
+      "tailwindcss",
+      "ts_ls"
+    }
+  },
+  dependencies = {
+    {
+      "mason-org/mason.nvim",
+      opts = {
+        ui = {
+          icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗",
+          },
+        },
+      }
+    },
+    "neovim/nvim-lspconfig",
+  },
 }
