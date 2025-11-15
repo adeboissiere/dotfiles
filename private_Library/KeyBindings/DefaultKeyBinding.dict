@@ -1,0 +1,4 @@
+{
+    "^w" = deleteWordBackward:;   // ctrl-w (ignored)
+    "^u" = deleteToBeginningOfLine:;  // ctrl-u (ignored)
+}
