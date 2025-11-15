@@ -10,7 +10,10 @@ return {
       "rust_analyzer",
       "svelte",
       "tailwindcss",
-      "ts_ls"
+      "ts_ls",
+      "terraformls",
+      "rust_analyzer",
+      "jdtls",
     }
   },
   dependencies = {
