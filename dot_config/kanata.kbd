@@ -46,25 +46,14 @@
 )
 
 (defalias
-  #|
-  a (tap-hold-release-keys $tap-time $hold-time a lctl $left-hand-keys)
-  s (tap-hold-release-keys $tap-time $hold-time s lalt $left-hand-keys)
-  d (tap-hold-release-keys $tap-time $hold-time d lmet $left-hand-keys)
-  f (tap-hold-release-keys $tap-time $hold-time f lsft $left-hand-keys)
-  j (tap-hold-release-keys $tap-time $hold-time j rsft $right-hand-keys)
-  k (tap-hold-release-keys $tap-time $hold-time k rmet $right-hand-keys)
-  l (tap-hold-release-keys $tap-time $hold-time l ralt $right-hand-keys)
-  ; (tap-hold-release-keys $tap-time $hold-time ; rctl $right-hand-keys)
-  |#
-
   a   (tap-hold $tap-time $hold-time a lctl)
-  s   (tap-hold $tap-time $hold-time s lalt)
-  d   (tap-hold $tap-time $hold-time d lmet)
-  f   (tap-hold $tap-time $hold-time f lsft)
-  j   (tap-hold $tap-time $hold-time j rsft)
-  k   (tap-hold $tap-time $hold-time k rmet)
-  l   (tap-hold $tap-time $hold-time l ralt)
-  ;   (tap-hold $tap-time $hold-time ; rctl)
+  r   (tap-hold $tap-time $hold-time r lalt)
+  s   (tap-hold $tap-time $hold-time s lmet)
+  t   (tap-hold $tap-time $hold-time t lsft)
+  n   (tap-hold $tap-time $hold-time n rsft)
+  e   (tap-hold $tap-time $hold-time e rmet)
+  i   (tap-hold $tap-time $hold-time i ralt)
+  o   (tap-hold $tap-time $hold-time o rctl)
 
   esc (tap-hold-release $tap-time $hold-time esc lrld)
 
@@ -75,9 +64,9 @@
 (deflayer base
   @esc
   grv   1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab   q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @caps @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    ret
-  lsft  z    x    c    v    b    n    m    ,    .    /    rsft
+  tab   q    w    f    p    b    j    l    u    y    ;    [    ]    \
+  @caps @a   @r   @s   @t   g    m    @n   @e   @i   @o   '    ret
+  lsft  z    x    c    d    v    k    h    ,    .    /    rsft
   lctl  @num lalt           spc            ralt rmet rctl
 )
 
