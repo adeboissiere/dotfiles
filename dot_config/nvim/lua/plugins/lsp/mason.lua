@@ -14,6 +14,7 @@ return {
       "terraformls",
       "rust_analyzer",
       "jdtls",
+      "gopls",
     }
   },
   dependencies = {
