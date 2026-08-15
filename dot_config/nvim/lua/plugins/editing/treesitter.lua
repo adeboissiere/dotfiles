@@ -1,61 +1,53 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	event = { "BufReadPre", "BufNewFile" },
+	branch = "main",
+	lazy = false,
 	build = ":TSUpdate",
 	dependencies = {
-		"windwp/nvim-ts-autotag",
+		{ "windwp/nvim-ts-autotag", opts = {} },
 	},
 	config = function()
-		-- import nvim-treesitter plugin
-		local treesitter = require("nvim-treesitter.configs")
+		local parsers = {
+			"json",
+			"yaml",
+			"html",
+			"css",
+			"markdown",
+			"markdown_inline",
+			"bash",
+			"lua",
+			"vim",
+			"dockerfile",
+			"gitignore",
+			"vimdoc",
+			"c",
+			"python",
+			"terraform",
+			"java",
+			"helm",
+			"hcl",
+			"regex",
+		}
 
-		-- configure treesitter
-		treesitter.setup({ -- enable syntax highlighting
-			highlight = {
-				enable = true,
-			},
-			fold = { enable = true },
-			sync_install = false,
-			ignore_install = {},
-			auto_install = true,
-			modules = {},
-			-- enable indentation
-			indent = { enable = true },
-			-- enable autotagging (w/ nvim-ts-autotag plugin)
-			autotag = {
-				enable = true,
-			},
-			-- ensure these language parsers are installed
-			ensure_installed = {
-				"json",
-				"yaml",
-				"html",
-				"css",
-				"markdown",
-				"markdown_inline",
-				"bash",
-				"lua",
-				"vim",
-				"dockerfile",
-				"gitignore",
-				"vimdoc",
-				"c",
-				"python",
-				"terraform",
-				"java",
-				"helm",
-				"hcl",
-				"regex",
-			},
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<C-space>",
-					node_incremental = "<C-space>",
-					scope_incremental = false,
-					node_decremental = "<bs>",
-				},
-			},
+		local group = vim.api.nvim_create_augroup("treesitter", { clear = true })
+		vim.api.nvim_create_autocmd("FileType", {
+			group = group,
+			pattern = vim.tbl_filter(function(parser)
+				return parser ~= "markdown_inline"
+			end, parsers),
+			callback = function(event)
+				vim.treesitter.start(event.buf)
+				vim.wo.foldmethod = "expr"
+				vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+			end,
+		})
+
+		vim.api.nvim_create_autocmd("FileType", {
+			group = group,
+			pattern = { "json", "yaml", "html", "css", "markdown", "bash", "lua", "c", "python", "terraform", "java", "hcl" },
+			callback = function(event)
+				vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+			end,
 		})
 	end,
 }

@@ -6,7 +6,6 @@ return {
       "html",
       "emmet_language_server",
       "lua_ls",
-      "pyright",
       "rust_analyzer",
       "svelte",
       "tailwindcss",
@@ -15,6 +14,8 @@ return {
       "rust_analyzer",
       "jdtls",
       "gopls",
+      "buf_ls",
+      "pyright",
     }
   },
   dependencies = {
