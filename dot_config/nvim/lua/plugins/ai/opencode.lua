@@ -1,6 +1,7 @@
 return {
   "nickjvandyke/opencode.nvim",
-  version = "*", -- Latest stable release
+  branch = "main", -- OpenCode v2 support (stable releases target v1)
+  version = false,
   config = function()
     ---@type opencode.Opts
     vim.g.opencode_opts = {
