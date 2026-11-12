@@ -1,3 +1,4 @@
+onboarding = false
 # herdr configuration
 # Place this file at ~/.config/herdr/config.toml
 
@@ -25,6 +26,8 @@
 # red = "#ff6188"
 # green = "#a6e3a1"
 
+name = "tokyo-night"
+auto_switch = false
 [terminal]
 # Executable used for new interactive panes.
 # Empty means $SHELL, then /bin/sh.
@@ -94,10 +97,10 @@
 # focus_pane_down = "prefix+j"
 # focus_pane_up = "prefix+k"
 # focus_pane_right = "prefix+l"
-# focus_pane_left = "ctrl+h"
-# focus_pane_down = "ctrl+j"
-# focus_pane_up = "ctrl+k"
-# focus_pane_right = "ctrl+l"
+focus_pane_left = ""
+focus_pane_down = ""
+focus_pane_up = ""
+focus_pane_right = ""
 # cycle_pane_next = "prefix+tab"
 # cycle_pane_previous = "prefix+shift+tab"
 # last_pane = ""          # optional, unset by default; bind e.g. "prefix+tab" for global back-and-forth
@@ -135,6 +138,30 @@ split_vertical = "prefix+|"
 
 # [worktrees]
 # directory = "~/.herdr/worktrees"
+
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "vim-herdr-navigation.left"
+description = "Navigate left (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "vim-herdr-navigation.down"
+description = "Navigate down (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "vim-herdr-navigation.up"
+description = "Navigate up (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "vim-herdr-navigation.right"
+description = "Navigate right (vim/herdr)"
 
 [ui]
 # Sidebar width (auto-scaled based on workspace names, this sets the default)
@@ -192,6 +219,8 @@ pane_gaps = false
 # accent = "cyan"
 
 # Background notification popup delivery
+agent_panel_sort = "spaces"
+status_indicators = "dots"
 [ui.toast]
 # off = disable pop-up notifications
 # herdr = show in-app toasts
@@ -200,6 +229,7 @@ pane_gaps = false
 # delivery = "off"
 # delay_seconds = 1
 
+delivery = "terminal"
 [ui.toast.herdr]
 # position = "bottom-right"
 
